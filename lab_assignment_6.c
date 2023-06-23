@@ -33,14 +33,19 @@ int main(void) {
     int countOfNums;
     FILE* inFile = fopen("input.txt", "r");
 
-    fscanf(inFile, " %d\n", &numInputs);
+    if (inFile == NULL) {
+        printf("Failed to open the file.\n");
+        return 1;
+    }
+
+    fscanf(inFile, "%d", &numInputs);
 
     while (numInputs-- > 0) {
-        fscanf(inFile, " %d\n", &countOfNums);
+        fscanf(inFile, "%d", &countOfNums);
         numArray = (int*)malloc(countOfNums * sizeof(int));
         average = 0;
         for (i = 0; i < countOfNums; i++) {
-            fscanf(inFile, " %d", &value);
+            fscanf(inFile, "%d", &value);
             numArray[i] = value;
             average += numArray[i];
         }
@@ -59,12 +64,4 @@ int main(void) {
 
     fclose(inFile);
     return 0;
-}
-
-		}
-
-		free(numArray);
-	}
-
-	fclose(inFile);
 }
